@@ -26,12 +26,24 @@ public class Main {
         }
 
         //최대공약수의 약수 찾기
-        for(int i=2;i<=gcdVal;i++){
-            //i가 최대공약수의 약수라면 출력.
-            if(gcdVal%i == 0){
+        
+        //case 1 (2~최대공약수 까지 탐색)
+//        for(int i=2;i<=gcdVal;i++){
+//            //i가 최대공약수의 약수라면 출력.
+//            if(gcdVal%i == 0){
+//                sb.append(i).append(" ");
+//            }
+//        }
+        
+        //case 2 (2~최대공약수의 절반까지 탐색)
+        for(int i=2; i<=gcdVal/2;i++){
+            //i^2 가 최대공약수의 약수라면 출력
+            if(gcdVal%i==0){
                 sb.append(i).append(" ");
             }
         }
+        sb.append(gcdVal);  //단 마지막 최대공약수를 출력해줘야 함.
+        
         System.out.println(sb);
 
     }
