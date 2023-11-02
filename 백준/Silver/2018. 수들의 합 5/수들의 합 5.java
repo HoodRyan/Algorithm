@@ -1,24 +1,33 @@
-import java.util.*;
+
+import java.util.Scanner;
+
 public class Main {
-     public static void main(String[] args) {
+    public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
+        int cnt = 1; // N이 15일 때 숫자 15를 뽑는 경우의 수
+        int start = 1; // 시작점
+        int end = 1; // 끝점
+        int sum = 1;
+        /* 투 포인터 이동 원칙
+        *  sum > N : sum = sum - start; start++;
+        *  sum < N : end++; sum = sum + end;
+        *  sum == N : end++; sum = sum + end; cnt++;
+        * */
 
-        if(N<=2){   // N = 1 일때 1이 연속된 값. N = 2 일때 2가 연속된 값.
-            System.out.println(1);
-        }else{
-            int sum;
-            int cnt = 1;
-            for(int i=1; i < (N/2)+1; i++){ // N의 절반까지만 계산하면 됨. 
-                sum = 0;
-                for(int j = i; sum<N;j++){
-                    sum = sum + j;
-                    if(sum == N){
-                        cnt++;
-                    }
-                }
+        while (end != N){
+            if(sum == N){ // 현재 연속 합이 N과 같을 경우
+                cnt++;
+                end++;
+                sum = sum + end;
+            } else if (sum > N) { // 현재 연속 합이 N보다 더 큰 경우
+                sum = sum - start;
+                start++;
+            }else{ // 현재 연속 합이 N보다 작은 경우
+                end++;
+                sum = sum + end;
             }
-            System.out.println(cnt);
         }
+        System.out.println(cnt);
     }
 }
